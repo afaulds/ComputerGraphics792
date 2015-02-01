@@ -3,7 +3,7 @@ var scene;
 var renderer;
 var player;
 var camera;
-var input;
+var Input;
 
 function initScene() {
 	// Setup scene.
@@ -27,7 +27,7 @@ function initScene() {
 
 	camera = new FollowCamera(scene);
 	player = new Player(scene);
-	input = new GameInput();
+	Input = new GameInput();
 
 	camera.init();
 	player.init();

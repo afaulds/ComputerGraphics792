@@ -19,19 +19,18 @@ Player.prototype.init = function() {
 };
 
 Player.prototype.update = function() {
-	console.log("Player.update")
 	var pos = this.obj.position;
-	if(input.arrowUp) {
-		pos.x += speed;
+	if(Input.arrowUp) {
+		pos.x += this.speed;
 	}
-	if(input.arrowDown) {
-		pos.x -= speed;
+	if(Input.arrowDown) {
+		pos.x -= this.speed;
 	}
-	if(input.arrowLeft) {
-		pos.z += speed;
+	if(Input.arrowLeft) {
+		pos.z -= this.speed;
 	}
-	if(input.arrowRight) {
-		pos.z -= speed;
+	if(Input.arrowRight) {
+		pos.z += this.speed;
 	}
 	this.obj.position.set(pos.x, pos.y, pos.z);
 	// this.obj.position.set(Math.random(), Math.random(), Math.random());

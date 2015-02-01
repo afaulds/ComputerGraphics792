@@ -1,17 +1,17 @@
+var inputId = 0;
 function GameInput() {
-	console.log("HERE")
     this.arrowUp = false;
     this.arrowDown = false;
     this.arrowLeft = false;
     this.arrowRight = false;
     this.space = false;
-	document.addEventListener("keydown", this.onKeyDown, false);
-	document.addEventListener("keyup", this.onKeyUp, false);
+    inputId++;
+	document.addEventListener("keydown", this.onKeyDown.bind(this), false);
+	document.addEventListener("keyup", this.onKeyUp.bind(this), false);
 }
 
 GameInput.prototype.onKeyDown = function(event) {
 	var keyCode = event.which;
-	console.log(keyCode)
 
 	if(keyCode == 38) { // UP
 		this.arrowUp = true;
