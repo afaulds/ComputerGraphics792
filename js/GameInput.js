@@ -1,17 +1,30 @@
-var inputId = 0;
-function GameInput() {
+function GameInput()
+{
     this.arrowUp = false;
     this.arrowDown = false;
     this.arrowLeft = false;
     this.arrowRight = false;
     this.space = false;
-    inputId++;
 	document.addEventListener("keydown", this.onKeyDown.bind(this), false);
 	document.addEventListener("keyup", this.onKeyUp.bind(this), false);
 }
 
-GameInput.prototype.onKeyDown = function(event) {
+GameInput.prototype.onKeyDown = function(event)
+{
 	var keyCode = event.which;
+
+	if(keyCode == 87 || keyCode == 119) { // W
+		this.arrowUp = true;
+	}
+	if(keyCode == 83 || keyCode == 115) { // S
+		this.arrowDown = true;
+	}
+	if(keyCode == 65 || keyCode == 97) { // A
+		this.arrowLeft = true;
+	}
+	if(keyCode == 68 || keyCode == 100) { // D
+		this.arrowRight = true;
+	}
 
 	if(keyCode == 38) { // UP
 		this.arrowUp = true;
@@ -27,8 +40,22 @@ GameInput.prototype.onKeyDown = function(event) {
 	}
 };
 
-GameInput.prototype.onKeyUp = function(event) {
+GameInput.prototype.onKeyUp = function(event)
+{
 	var keyCode = event.which;
+
+	if(keyCode == 87 || keyCode == 119) { // W
+		this.arrowUp = false;
+	}
+	if(keyCode == 83 || keyCode == 115) { // S
+		this.arrowDown = false;
+	}
+	if(keyCode == 65 || keyCode == 97) { // A
+		this.arrowLeft = false;
+	}
+	if(keyCode == 68 || keyCode == 100) { // D
+		this.arrowRight = false;
+	}
 
 	if(keyCode == 38) { // UP
 		this.arrowUp = false;
