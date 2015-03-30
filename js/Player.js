@@ -7,17 +7,17 @@ function Player(scene)
     this.collisionGeometry = null;
 }
 
-Player.prototype.init = function() {
+Player.prototype.init = function()
+{
 	//var parent = this.scene.getObjectByName( "Characters" );
 	this.obj = new THREE.Object3D();
 	this.obj.name = "Player";
 
-	var geometry = new THREE.BoxGeometry( 1, 1.5, 2 );
-	var material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
-	var sphere = new THREE.Mesh( geometry, material );
+	var geometry = new THREE.BoxGeometry(1, 1.5, 2);
+	var material = new THREE.MeshBasicMaterial({color: 0xffff00});
+	var box = new THREE.Mesh(geometry, material);
 
-	this.collisionGeometry = geometry;
-	this.obj.add(sphere);
+	this.obj.add(box);
 	this.scene.add(this.obj);
 
 	var axisHelper = new THREE.AxisHelper( 5 );

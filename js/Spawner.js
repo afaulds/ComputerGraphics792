@@ -2,72 +2,32 @@ function Spawner(scene)
 {
     this.scene = scene;
     this.spawnRate = 60; // per minute
-    this.maxSpawn = 500;
-    this.spawnList = [];
-    this.neighborDistance = 200;
-    this.alignmentWeight = 0.8;
-    this.cohesionWeight = 0.5;
-    this.alignmentWeight = 0.5;
+    this.maxSpawn = 100;
+    this.boids = [];
+    this.enemies = [];
 }
 
 Spawner.prototype.init = function()
 {
-};
-
-Spawner.prototype.update = function(deltaTime)
-{
-	if(Math.random() < 0.5 && this.spawnList.length < this.maxSpawn)
+	for(var i = 0; i < this.maxSpawn; i++)
 	{
 		console.log("SPAWN OBJECT");
 		var enemy = new Enemy(this.scene);
 		enemy.init();
-		this.spawnList.push(enemy);
-	}
-	for(var i = 0; i < this.spawnList.length; i++)
-	{
-		this.flock(this.spawnList[i]);
-		this.spawnList[i].update(deltaTime);
+		var boid = new Boid();
+		boid.setAvoidWalls( true );
+		boid.setWorldSize(500, 500, 500);
+		boid.position = new THREE.Vector3((2 * Math.random() - 1) * 500, (2 * Math.random() - 1) * 500, (2 * Math.random() - 1) * 500);
+		this.boids.push(boid);
+		this.enemies.push(enemy);
 	}
 };
 
-Spawner.prototype.flock = function(spawn)
+Spawner.prototype.update = function(deltaTime)
 {
-	var alignment = new THREE.Vector3();
-	var cohesion = new THREE.Vector3();
-	var separation = new THREE.Vector3();
-	var neighborCount = 0;
-
-	for(var i = 0; i < this.spawnList.length; i++)
+	for(var i = 0; i < this.boids.length; i++)
 	{
-		var neighbor = this.spawnList[i];
-		if(neighbor != spawn)
-		{
-			if(neighbor.getPosition().distanceToSquared(spawn.getPosition()) < this.neighborDistance)
-			{
-				neighborCount++;
-				alignment.add(spawn.velocity);
-				cohesion.add(neighbor.getPosition());
-				separation.add(spawn.getPosition());
-				separation.sub(neighbor.getPosition());
-			}
-		}
+		this.boids[i].run(this.boids);
+		this.enemies[i].getPosition().copy(this.boids[i].position);
 	}
-
-	alignment.normalize();
-	alignment.multiplyScalar(this.alignmentWeight);
-	if(neighborCount > 0)
-	{
-		cohesion.divideScalar(neighborCount);
-		cohesion.sub(spawn.getPosition());
-		cohesion.normalize();
-	}
-	cohesion.multiplyScalar(this.cohesionWeight);
-
-	separation.normalize();
-
-	spawn.velocity.add(alignment);
-	spawn.velocity.add(cohesion);
-	spawn.velocity.add(separation);
-	spawn.velocity.normalize();
-	spawn.velocity.multiplyScalar(10);
 };

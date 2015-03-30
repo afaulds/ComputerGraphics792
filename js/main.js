@@ -36,7 +36,7 @@ function initScene() {
 	spawner.init();
 
 	camera.setLookAt(player, new THREE.Vector3(-10, 4, 0), CameraTypeEnum.THIRD);
-	//camera.setLookAt(player, new THREE.Vector3(-50, 50, 0), CameraTypeEnum.WORLD);
+	// camera.setLookAt(player, new THREE.Vector3(-200, 200, 0), CameraTypeEnum.WORLD);
 
 	// Start rendering.
 	render();
