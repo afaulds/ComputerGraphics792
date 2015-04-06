@@ -1,5 +1,5 @@
 // Global variables.
-var clock, scene, renderer, player, camera, spawner, Input;
+var clock, scene, renderer, player, camera, spawner, hud;
 
 function initScene() {
 	// Setup scene.
@@ -24,18 +24,24 @@ function initScene() {
 	scene.add(obj);
 
 	// Construct objects.
-	player = new Player(scene);
+	gameInput = new GameInput();
+
+	player = new Player(scene, gameInput);
 	camera = new GameCamera(scene);
 	spawner = new Spawner(scene);
-	Input = new GameInput();
+	hud = new HUD(scene);
 	clock = new THREE.Clock();
 
 	// Initialize objects.
 	camera.init();
 	player.init();
 	spawner.init();
+	hud.init();
 
-	camera.setLookAt(player, new THREE.Vector3(-10, 4, 0), CameraTypeEnum.THIRD);
+	spawner.setPlayer(player);
+	spawner.setHUD(hud);
+
+	camera.setLookAt(player, new THREE.Vector3(0, 10, -10), CameraTypeEnum.THIRD);
 	// camera.setLookAt(player, new THREE.Vector3(-200, 200, 0), CameraTypeEnum.WORLD);
 
 	// Start rendering.
@@ -45,7 +51,7 @@ function initScene() {
 
 function setupSkyDome()
 {
-	var texture	= THREE.ImageUtils.loadTexture("img/deep_space.jpg");
+	var texture	= THREE.ImageUtils.loadTexture("img/ocean.jpg");
 	texture.minFilter = THREE.NearestFilter;
 	var material = new THREE.MeshBasicMaterial({map: texture, side: THREE.DoubleSide});
 	var geometry = new THREE.SphereGeometry(100000, 20, 20);
@@ -63,6 +69,7 @@ function render()
 	player.update(deltaTime);
 	camera.update(deltaTime);
 	spawner.update(deltaTime);
+	hud.update(deltaTime);
 
 	requestAnimationFrame(render);
 	renderer.render(this.scene, this.camera.obj);

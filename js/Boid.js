@@ -2,10 +2,10 @@ var Boid = function()
 {
 	var vector = new THREE.Vector3(),
 	_acceleration, _width = 500, _height = 500, _depth = 200, _goal, _neighborhoodRadius = 50,
-	_maxSpeed = 2, _maxSteerForce = 0.1, _avoidWalls = false;
+	_maxSpeed = 1, _maxSteerForce = 0.1, _avoidWalls = false;
 
 	this.position = new THREE.Vector3();
-	this.velocity = new THREE.Vector3(Math.random(), Math.random(), Math.random());
+	this.velocity = new THREE.Vector3(Math.random() * 10, Math.random() * 10, Math.random() * 10);
 	_acceleration = new THREE.Vector3();
 
 	this.setGoal = function(target)
