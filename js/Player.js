@@ -9,7 +9,7 @@ function Player(scene, input)
 	this.tailTime = 0;
 	this.geometry = null;
 	this.size = 5;
-    this.collisionDistanceSquared = this.size * this.size;
+    this.collisionDistance = this.size;
 }
 
 Player.prototype.init = function()

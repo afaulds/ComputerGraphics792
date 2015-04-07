@@ -1,16 +1,28 @@
-function Enemy(scene)
+function Fish(scene)
 {
-    this.scene = scene;
-    this.velocity = new THREE.Vector3();
-    this.obj = null;
-    this.size = Math.random() * 5 + 3;
-    this.collisionDistanceSquared = this.size * this.size;
+	this.scene = scene;
+	this.velocity = new THREE.Vector3();
+	this.obj = null;
+	var temp = Math.random();
+	if(temp < 0.3)
+	{
+		this.size = 10;
+	}
+	else if(temp < 0.6)
+	{
+		this.size = 6;
+	}
+	else
+	{
+		this.size = 3;
+	}
+	this.collisionDistance = this.size;
 }
 
-Enemy.prototype.init = function()
+Fish.prototype.init = function()
 {
 	this.obj = new THREE.Object3D();
-	this.obj.name = "Enemy";
+	this.obj.name = "Fish";
 
 	var color = new THREE.Color();
 	color.setHSL(Math.random(), 1.0, 0.5);
@@ -25,7 +37,7 @@ Enemy.prototype.init = function()
 	this.scene.add(this.obj);
 };
 
-Enemy.prototype.update = function(deltaTime)
+Fish.prototype.update = function(deltaTime)
 {
 	var pos = this.obj.position;
 	var distance = this.velocity.clone();
@@ -38,22 +50,22 @@ Enemy.prototype.update = function(deltaTime)
 	this.obj.lookAt(point);
 };
 
-Enemy.prototype.getPosition = function()
+Fish.prototype.getPosition = function()
 {
 	return(this.obj.position);
 };
 
-Enemy.prototype.calcDist = function(otherObject)
+Fish.prototype.calcDist = function(otherObject)
 {
 	var dist = this.getPosition().distanceToSquared(otherObject.getPosition());
 	return(dist);
 };
 
-Enemy.prototype.isCollision = function(otherObject)
+Fish.prototype.isCollision = function(otherObject)
 {
 	// Use square distance to speed up calculation.
-	var dist = this.getPosition().distanceToSquared(otherObject.getPosition());
-	if(dist < this.collisionDistanceSquared + otherObject.collisionDistanceSquared)
+	var dist = this.getPosition().distanceTo(otherObject.getPosition());
+	if(dist < this.collisionDistance + otherObject.collisionDistance)
 	{
 		return(true);
 	}
@@ -63,12 +75,12 @@ Enemy.prototype.isCollision = function(otherObject)
 	}
 };
 
-Enemy.prototype.destroy = function()
+Fish.prototype.destroy = function()
 {
 	this.scene.remove(this.obj);
 };
 
-Enemy.prototype.buildFish = function(size, color)
+Fish.prototype.buildFish = function(size, color)
 {
 	var geometry = new THREE.Geometry();
 	geometry.vertices.push(
