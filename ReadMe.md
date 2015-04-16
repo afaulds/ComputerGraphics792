@@ -15,6 +15,14 @@ a life and 3 lives gone is a game over.
 5. Takes a while to load at first because I add in all fish and mines in the beginning.
 
 ## Programming Concepts
+### Gaming controls
+I implemented just turning in this game because the playable character is a shark.  The shark
+continually moves forward and I built a javascript object that catches button down and
+button up events to allow for turning in both yaw and pitch directions.  I implemented
+the buttons to work with the arrow keys and WASD keys as those are normal gaming keys.
+If given enough time I would have added a space bar speed boost with limited use to make
+it so you could speed after schools of fish or avoid the mines.
+
 ### Heads up display (HUD)
 For the heads up display for this game, I added points, health a couple pop up graphics
 to indicate actions and a game over screen.  These elements use HTML and absolute positioning
@@ -32,7 +40,7 @@ take some health from the player (and trigger other HUD elements).
 ### Animation
 For this game I added animation of the fin.  Given more time I would have animated the
 entire body to give a nice smooth swimming motion but for this game I simply updated
-the triangle geometry in the tail to move back and forth in a sinusodal pattern.
+the triangle geometry in the tail to move back and forth in a sinusoidal pattern.
 
 ### Smoothed Camera
 The camera for this game is a 3rd person camera that has smoothing applied to it so that
