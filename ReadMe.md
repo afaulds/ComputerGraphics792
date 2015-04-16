@@ -7,8 +7,15 @@ shark around and try and eat the fish.  If you eat the fish you get points but y
 to avoid the sea-mines that are sinking around you.  If you hit one of those you lose
 a life and 3 lives gone is a game over.
 
+## Notes
+1. Only tested on Chrome so far.  Seems to work in firefox OK and IE not at all.
+2. Uploading my code to google drive and linking it.
+3. Had some issues with images and "cross site image loading" and resolved that by converting the images to javascript code.
+4. The sky box looks more like a sky and less like the ocean.  I could not find a great skybox image.
+5. Takes a while to load at first because I add in all fish and mines in the beginning.
+
 ## Programming Concepts
-### Heads up display
+### Heads up display (HUD)
 For the heads up display for this game, I added points, health a couple pop up graphics
 to indicate actions and a game over screen.  These elements use HTML and absolute positioning
 to float graphical elements over the 3D display window.  It gives the effect of items
